@@ -4,7 +4,16 @@ import Landing from "./Landing";
 import "./App.css";
 
 const App = () => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 1000 * 60 * 3, // Cache for 5 minutes
+        cacheTime: 1000 * 60 * 3,
+        refetchOnWindowFocus: false,
+        retry: 2,
+      },
+    },
+  });
   return (
     <Container>
       <QueryClientProvider client={queryClient}>
